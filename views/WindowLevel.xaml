@@ -1,0 +1,57 @@
+﻿<Window x:Class="GamePuzzle.views.WindowLevel"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:GamePuzzle.views"
+        mc:Ignorable="d"
+        Title="WindowLevel" MaxHeight="350" MaxWidth="500" MinHeight="350" MinWidth="500" Height="300" Width="400" Closing="Window_Closing">
+    <Window.Resources>
+        <ResourceDictionary Source="/styles/StyleButton.xaml"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="btnEasy" Style="{StaticResource btnStyle}" Width="150" Height="60" Grid.Row="0" Click="btnEasy_Click">Easy</Button>
+            <Button x:Name="btnNormal" Style="{StaticResource btnStyle}" Width="150" Height="60" Grid.Row="1" Click="btnNormal_Click">Normal</Button>
+            <Button x:Name="btnHard" Style="{StaticResource btnStyle}" Width="150" Height="60" Grid.Row="2" Click="btnHard_Click">Hard</Button>
+        </Grid>
+        <Grid Grid.Column="1">
+            <CheckBox x:Name="chbCustom" Foreground="White" FontFamily="Sitka Display" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top"  Margin="20" Content="Custom" Checked="chbCustom_Checked" Unchecked="chbCustom_Unchecked">
+                <CheckBox.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="2" ScaleX="2"/>
+                    </TransformGroup>
+                </CheckBox.LayoutTransform>
+
+            </CheckBox>
+            <Slider x:Name="sldRows" IsEnabled="{Binding ElementName=chbCustom, Path=IsChecked}" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="100,100,0,0" VerticalAlignment="Top" Height="22" Width="90" Minimum="3" Maximum="20" SmallChange="1">
+                <Slider.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    </TransformGroup>
+                </Slider.LayoutTransform>
+            </Slider>
+            <Slider x:Name="sldCols" IsEnabled="{Binding ElementName=chbCustom, Path=IsChecked}" IsSnapToTickEnabled="True" HorizontalAlignment="Left" Margin="100,180,0,0" VerticalAlignment="Top" Height="22" Width="90" Maximum="20" Minimum="3" SmallChange="1">
+                <Slider.LayoutTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="2" ScaleY="2"/>
+                    </TransformGroup>
+                </Slider.LayoutTransform>
+            </Slider>
+            <Label Content="Rows" HorizontalAlignment="Left" Height="36" Margin="10,102,0,0" VerticalAlignment="Top" Width="76" Foreground="#FFFFF301" FontFamily="Sitka Text" FontSize="24" FontWeight="Bold" Background="#FFB91F1F"/>
+            <Label Content="Cols" HorizontalAlignment="Left" Height="36" Margin="10,182,0,0" VerticalAlignment="Top" Width="76" Foreground="#FFFFF301" FontFamily="Sitka Text" FontSize="24" FontWeight="Bold" Background="#FFB91F1F"/>
+            <Label Content="{Binding ElementName=sldRows, Path=Value}" HorizontalAlignment="Left" Height="34" Margin="230,80,0,0" VerticalAlignment="Top" Width="44" FontFamily="Times New Roman" FontWeight="Bold" FontSize="24" Foreground="Red"/>
+            <Label Content="{Binding ElementName=sldCols, Path=Value}" HorizontalAlignment="Left" Height="34" Margin="230,162,0,0" VerticalAlignment="Top" Width="44" FontFamily="Times New Roman" FontWeight="Bold" FontSize="24" Foreground="Red" RenderTransformOrigin="0.568,0.294"/>
+            <Button x:Name="btnOK" Content="OK" Style="{StaticResource btnStyle}" HorizontalAlignment="Center" Margin="0,230,0,0" Width="80" IsEnabled="{Binding ElementName=chbCustom, Path=IsChecked}" Click="btnOK_Click"/>
+        </Grid>
+    </Grid>
+</Window>
